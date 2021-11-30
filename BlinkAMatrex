@@ -1,0 +1,30 @@
+const byte  ledPins[4] = { 2, 3, 4, 5};
+
+const byte ledState[4][4] {
+  { 1, 0, 0, 0},
+  { 0, 1, 0, 0}, 
+  { 0, 0, 1, 0},
+  { 0, 0, 0, 1} // Led on and off array.
+};
+
+void setup() {
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(A0, INPUT);
+  Serial.begin(9600);
+}
+
+void ledDriver(byte pattern) {
+  for (byte count = 0; count < 4; count++) {
+    digitalWrite(ledPins[count], ledState[pattern][count]);
+  }
+}
+
+void loop() {
+  for (byte count = 0; count < 4; count++) {
+    ledDriver(count);
+    delay(5000);
+  }
+}
